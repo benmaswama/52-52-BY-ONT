@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projet 52 - Promotion de la culture et des événements artistiques en République Démocratique du Congo">
+  <title>Projet 52 - Événements Culturels RDC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <!-- Header -->
+   <div class="absolute inset-0 overflow-hidden">
+    <img src="assets/img/bgc.png">
+  </div>
+  <header class="bg-[#38003A] text-white px-4 py-2 flex items-center justify-between">
+    <div class="flex items-center">
+      <div>
+        <div class="text-white flex items-center justify-center">
+          <div class="relative pl-4 md:pl-8"> <!-- Ajustez la valeur pl-* selon votre besoin -->
+    <div class="mb-8 md:mb-0">
+        <img src="assets/img/logo52.svg" alt="Logo" class="h-10 mb-2">
+    </div>
+</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex space-x-6 items-center">
+  <div class="relative">
+  <!-- Icône de recherche (visible par défaut) -->
+  <button id="search-toggle" class="hidden md:block p-1 focus:outline-none">
+    <img src="assets/img/rechercher.svg" alt="Recherche" class="w-6 h-6 hover:opacity-80 transition-opacity">
+  </button>
+  
+  <!-- Barre de recherche (cachée par défaut) -->
+  <div id="search-bar" class="hidden absolute right-0 top-full mt-2 bg-white rounded-full shadow-md z-50 overflow-hidden">
+    <form action="/search" method="GET" class="flex items-center">
+      <input 
+        type="text" 
+        name="q" 
+        placeholder="Rechercher..." 
+        class="py-2 px-4 w-64 focus:outline-none text-gray-700"
+      >
+      <button type="submit" class="p-2 text-[#E20052] hover:bg-gray-100">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchToggle = document.getElementById('search-toggle');
+    const searchBar = document.getElementById('search-bar');
+    let isSearchOpen = false;
+
+    // Fonction pour basculer la barre de recherche
+    function toggleSearch() {
+      isSearchOpen = !isSearchOpen;
+      searchBar.classList.toggle('hidden');
+      
+      // Focus sur l'input quand la barre s'ouvre
+      if (isSearchOpen) {
+        setTimeout(() => {
+          searchBar.querySelector('input').focus();
+        }, 10);
+      }
+    }
+
+    // Gestion du clic sur l'icône
+    searchToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleSearch();
+    });
+
+    // Fermer la barre si on clique ailleurs
+    document.addEventListener('click', function(e) {
+      if (isSearchOpen && !searchBar.contains(e.target) && e.target !== searchToggle) {
+        toggleSearch();
+      }
+    });
+
+    // Empêcher la fermeture quand on clique dans la barre
+    searchBar.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+
+ <div class="relative">
+  <!-- Icône profil avec indicateur visuel -->
+  <button id="auth-toggle" class="hidden md:flex items-center p-1 focus:outline-none group">
+    <img src="assets/img/profil.svg" alt="Profil" class="w-7 h-7 transition-transform group-hover:scale-110">
+    <svg class="w-4 h-4 ml-1 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+  
+  <!-- Menu auth - version premium -->
+  <div id="auth-menu" class="hidden absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl z-50 overflow-hidden border border-gray-100">
+    
+    <div class="divide-y divide-gray-100">
+      <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition-colors">
+        <svg class="w-5 h-5 mr-3 text-[#E20052]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+        </svg>
+        <span class="text-gray-700 font-medium">Connexion</span>
+      </a>
+      
+      <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition-colors">
+        <svg class="w-5 h-5 mr-3 text-[#E20052]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+        </svg>
+        <span class="text-gray-700 font-medium">Inscription</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const authToggle = document.getElementById('auth-toggle');
+    const authMenu = document.getElementById('auth-menu');
+    let isAuthOpen = false;
+
+    // Animation d'ouverture/fermeture
+    function toggleAuthMenu() {
+      isAuthOpen = !isAuthOpen;
+      authMenu.classList.toggle('hidden');
+      authMenu.classList.toggle('opacity-0');
+      authMenu.classList.toggle('scale-95');
+    }
+
+    authToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleAuthMenu();
+    });
+
+    document.addEventListener('click', function(e) {
+      if (isAuthOpen && !authMenu.contains(e.target) && e.target !== authToggle) {
+        toggleAuthMenu();
+      }
+    });
+
+    authMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style>
+  #auth-menu {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.2s ease-out;
+  }
+  #auth-menu:not(.hidden) {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+
+ <div class="relative flex space-x-6 items-center">
+  <!-- Vos autres icônes de navigation ici -->
+  
+  <!-- Menu Burger avec dropdown -->
+ <div class="relative flex items-center">
+  <!-- Bouton du menu burger -->
+  <button id="menu-toggle" class="p-2 focus:outline-none">
+    <img src="assets/img/burger.svg" alt="Menu" class="w-6 h-6">
+  </button>
+  
+  <!-- Dropdown menu - caché par défaut -->
+  <div id="dropdown-menu" class="hidden absolute right-0 top-full mt-1 w-56 bg-white-80 rounded-md shadow-xl z-50 ">
+    <a href="index.html" class="block px-4 py-3 text-white-800 hover:bg-[#E20052] hover:text-white transition-colors rounded-md" style="text-align: right;">Accueil</a>
+    <a href="about.html" class="block px-4 py-3 text-white-800 hover:bg-[#E20052] hover:text-white transition-colors rounded-md" style="text-align: right;">A propos</a>
+    <a href="profesionnels.html" class="block px-4 py-3 text-white-800 hover:bg-[#E20052] hover:text-white transition-colors rounded-md" style="text-align: right;">Professionnel</a>
+    <a href="Contact.html" class="block px-4 py-3 text-white-800 hover:bg-[#E20052] hover:text-white transition-colors rounded-md" style="text-align: right;">Contact</a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    
+    menuToggle.addEventListener('click', function(e) {
+      e.stopPropagation(); // Empêche la propagation du clic
+      dropdownMenu.classList.toggle('hidden');
+    });
+    
+    // Ferme le menu quand on clique ailleurs
+    document.addEventListener('click', function() {
+      dropdownMenu.classList.add('hidden');
+    });
+    
+    // Empêche la fermeture quand on clique dans le menu
+    dropdownMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+
+</div>
+  </header>
+
+  <!-- Hero Section -->
+   <section class="relative bg-black text-white h-[400px] flex items-center justify-start overflow-hidden">
+  <!-- Image de fond - version "contain" -->
+<div class="absolute inset-0 bg-black">
+  <img src="assets/img/Banner Pro.png" alt="bg" 
+       class="h-full w-full object-cover brightness-20">
+</div>
+  
+
+</section>
+<section class="py-16 py-4">
+    <!-- Titres -->
+    <div class="text-center mb-12">
+      <div class="flex justify-center items-center gap-4 mb-3">
+  <h3 class="text-5xl font-bold text-[#E20052]">Devenir</h3>
+  <p class="text-5xl font-bold text-black">Partenaire</p>
+</div><!-- Sous-titre -->
+      <p class="text-5xl font-bold text-black mb-6">du secteur !</p>
+      <!-- Ligne de séparation -->
+      <div class="w-24 h-2 bg-[#E20052] mx-auto mt-6 mb-0 rounded-full"></div>
+      
+      <p class="text-lg text-gray-600 mb-6 mt-8">
+  Vous êtes organisateur d'événements, opérateur touristique <br> 
+   ou acteur du secteur culturel en RDC ? 52/52 est votre plateforme pour donner <br>
+  de la visibilité à vos Activités et attirer plus de participants !
+</p>
+    </div>   
+    
+      <div class="flex flex-col md:flex-row gap-8 items-stretch mb-10">
+  <!-- Bloc de texte à gauche -->
+<div class="flex-1 flex flex-col right text-gray-900 pl-24">
+  <h2 class="text-2xl font-bold mb-4">Pourquoi nous contacter ?</h2>
+  <p class="mb-4 text-left">
+    Notre équipe est à votre écoute pour toute demande d'information, de partenariat ou d'organisation d'événement culturel. 
+    N'hésitez pas à nous écrire, nous vous répondrons dans les plus brefs délais.
+  </p>
+  <ul class="list-disc pl-5 space-y-2">
+    <li>Collaboration avec des artistes et professionnels</li>
+    <li>Organisation d'événements</li>
+    <li>Questions sur nos services</li>
+  </ul>
+</div>
+  <!-- Formulaire à droite, largeur et hauteur réduites -->
+  <div class="flex-1 flex flex-col items-center justify-center">
+    <div class="bg-[#E20052] p-5 md:p-7 text-white rounded-lg shadow-lg max-w-md w-full">
+      <h3 class="text-xl md:text-2xl font-bold text-center mb-6">Laissez-nous un message</h3>
+      <form class="space-y-3">
+        <div class="grid grid-cols-1 gap-4">
+          <div>
+            <label class="block mb-2 font-medium">Noms*</label>
+            <input type="text" class="w-full px-3 py-2 rounded-lg bg-white bg-opacity-100 placeholder-black placeholder-opacity-70 focus:ring-2 focus:ring-white focus:outline-none">
+          </div>
+          <div>
+            <label class="block mb-2 font-medium">Prénom*</label>
+            <input type="text" class="w-full px-3 py-2 rounded-lg bg-white bg-opacity-100 placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-white focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">Adresse mail*</label>
+          <input type="email" class="w-full px-3 py-2 rounded-lg bg-white bg-opacity-100 placeholder-white placeholder-opacity-70 focus:ring-2 focus:ring-white focus:outline-none">
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">Numéro Téléphone</label>
+          <input type="tel" class="w-full px-3 py-2 rounded-lg bg-white bg-opacity-100 placeholder-white placeholder-opacity-900 focus:ring-2 focus:ring-white focus:outline-none">
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">Message*</label>
+          <textarea class="w-full px-3 py-2 rounded-lg bg-white bg-opacity-900 placeholder-black placeholder-opacity-70 focus:ring-2 focus:ring-white focus:outline-none" rows="3"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 mt-2">
+          Envoyer le message
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<section class="py-16 px-4">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Grande vidéo carrée (2/3 de largeur) -->
+      <div class="lg:col-span-2 relative group rounded-xl overflow-hidden shadow-xl aspect-square">
+        <img src="assets/img/img2.png" alt="Jazz Festival" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-8">
+          <h3 class="text-white text-3xl font-bold mb-2">Odavu</h3>
+          <p class="text-white text-lg mb-6">Festival de Jazz</p>
+          <button class="absolute inset-0 flex items-center justify-center" onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+            <div class="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center hover:bg-opacity-50 transition-all">
+              <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24"><polygon points="9.5,7.5 16.5,12 9.5,16.5"/></svg>
+            </div>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Deux petites vidéos rectangulaires empilées (1/3 de largeur) -->
+      <div class="flex flex-col gap-6">
+        <!-- Vidéo 2 - Rectangle -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg aspect-[3/3]">
+          <img src="assets/img/img3.png" alt="Kobo Art Festival" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+            <div class="flex justify-between items-end">
+              <div>
+                <h3 class="text-white text-xl font-bold mb-1">KOBO ART</h3>
+                <p class="text-white text-sm">Festival</p>
+              </div>
+              <button class="bg-[#FF2D6A] hover:bg-[#e0265c] text-white px-4 py-2 rounded-lg transition-colors">
+                En savoir +
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Vidéo 3 - Rectangle -->
+        <div class="relative group rounded-xl overflow-hidden shadow-lg aspect-[3/3]">
+          <img src="assets/img/img4.png" alt="Festival Traditionnel" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+            <h3 class="text-white text-xl font-bold mb-1">Festival Traditionnel</h3>
+            <p class="text-white text-sm">Costumes et cérémonies</p>
+            <button class="absolute inset-0" onclick="openVideoModal('URL_VIDEO_3')"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modale vidéo -->
+  <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+    <div class="relative w-full max-w-2xl mx-auto">
+      <button onclick="closeVideoModal()" class="absolute -top-8 right-0 text-white text-4xl">&times;</button>
+      <div class="aspect-w-12 aspect-h-10">
+        <iframe id="video-iframe" src="" allowfullscreen class="w-full h-60 rounded-lg"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+<footer class="relative text-white py-10">
+  <!-- Image de fond -->
+  <div class="absolute inset-0 overflow-hidden">
+    <img src="assets/img/footer.jpg" alt="Background" class="w-full h-full object-cover">
+  </div>
+  
+  <!-- Contenu du footer avec position relative pour apparaître au-dessus du bg -->
+  <div class="max-w-6xl mx-auto px-4 relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-start">
+      <!-- Logo et copyright -->
+      <div class="mb-8 md:mb-0">
+        <img src="assets/img/logo52.svg" alt="Logo" class="h-200 mb-4">
+      </div>
+      
+      <!-- Navigation -->
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <h4 class="font-bold mb-4 text-lg">Menu</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html" class="hover:underline">Accueil</a></li>
+            <li><a href="Activites.html" class="hover:underline">Événements</a></li>
+            <li><a href="profesionnels.html" class="hover:underline">Partenaires</a></li>
+            <li><a href="about.html" class="hover:underline">À propos</a></li>
+            <li><a href="Contact.html" class="hover:underline">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold mb-4 text-lg">Liens</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:underline">Presse</a></li>
+            <li><a href="#" class="hover:underline">Actualités</a></li>
+            <li><a href="#" class="hover:underline">Galerie</a></li>
+            <li><a href="#" class="hover:underline">Médias</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4 text-lg">Contact</h4>
+          <ul class="space-y-2 text-sm">
+            <li>14, Colonel Lukusa</a></li>
+            <li>Gombe/Kinshasa</a></li>
+            <li>RD Congo</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-bold mb-4 text-lg">Newsletter</h4>
+          <div class="flex flex-col space-y-2">
+            <input type="email" placeholder="Votre email" class="px-3 py-2 rounded text-gray-900 text-sm">
+            <button class="bg-[#FF2D6A] hover:bg-[#e0265c] text-white rounded px-3 py-2 transition text-sm">S'inscrire</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   <div class="border-t border-white border-opacity-50 mt-10 pt-6">
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-xs opacity-80">
+    <p class="text-sm">Powered by Office National du Tourisme © 2025 Projet 52. Tous droits réservés.</p>
+    
+    <div class="flex space-x-4">
+      <!-- Facebook -->
+      <a href="#" class="hover:opacity-80">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 5.006 3.657 9.128 8.438 9.877v-6.987h-2.54v-2.89h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.242 0-1.632.771-1.632 1.562v1.875h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 17.006 22 12"></path>
+        </svg>
+      </a>
+      
+      <!-- Twitter/X -->
+      <a href="#" class="hover:opacity-80">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22.46 6c-.77.35-1.6.59-2.46.69a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99C7.69 9.09 4.07 7.38 1.64 4.9c-.37.63-.58 1.36-.58 2.14 0 1.48.75 2.78 1.89 3.54-.7-.02-1.36-.21-1.94-.53v.05c0 2.07 1.47 3.8 3.42 4.19-.36.1-.74.16-1.13.16-.28 0-.54-.03-.8-.08.54 1.68 2.12 2.91 3.99 2.94A8.6 8.6 0 0 1 2 19.54 12.13 12.13 0 0 0 8.29 21.5c7.55 0 11.68-6.26 11.68-11.68 0-.18-.01-.36-.02-.54A8.18 8.18 0 0 0 22.46 6z"></path>
+        </svg>
+      </a>
+      
+      <!-- Instagram -->
+      <a href="#" class="hover:opacity-80">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.97.24 2.43.41.59.22 1.01.48 1.45.92.44.44.7.86.92 1.45.17.46.354 1.26.41 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.41 2.43-.22.59-.48 1.01-.92 1.45-.44.44-.86.7-1.45.92-.46.17-1.26.354-2.43.41-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.43-.41-.59-.22-1.01-.48-1.45-.92-.44-.44-.7-.86-.92-1.45-.17-.46-.354-1.26-.41-2.43C.012 8.332 0 8.736 0 12c0 3.264.012 3.668.07 4.948.058 1.28.242 2.18.47 2.92.25.82.58 1.51 1.27 2.2.69.69 1.38 1.02 2.2 1.27.74.228 1.64.412 2.92.47C8.332 23.988 8.736 24 12 24s3.668-.012 4.948-.07c1.28-.058 2.18-.242 2.92-.47.82-.25 1.51-.58 2.2-1.27.69-.69 1.02-1.38 1.27-2.2.228-.74.412-1.64.47-2.92.058-1.28.07-1.684.07-4.948s-.012-3.668-.07-4.948c-.058-1.28-.242-2.18-.47-2.92-.25-.82-.58-1.51-1.27-2.2-.69-.69-1.38-1.02-2.2-1.27-.74-.228-1.64-.412-2.92-.47C15.668.012 15.264 0 12 0z"></path>
+        </svg>
+      </a>
+      
+      <!-- TikTok (Nouveau) -->
+      <a href="#" class="hover:opacity-80">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+        </svg>
+      </a>
+      
+      <!-- YouTube (Nouveau) -->
+      <a href="#" class="hover:opacity-80">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+</footer>
+  <script src="scripts/main.js"></script>
+</body>
